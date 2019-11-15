@@ -1,0 +1,19 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [true, "single", "jsx-double"],
+    "indent": [true, "spaces", 2],
+    "member-access": [true, "no-public"],
+    "trailing-comma": [false, { "esSpecCompliant": true }],
+    "ordered-imports": false,
+    "no-implicit-dependencies": [true, ["@app", "@assets"]],
+    "no-submodule-imports": [true, "core-js/es", "@app", "@assets"],
+    "object-literal-key-quotes": [true, "consistent"]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["**/node_modules/**"]
+  }
+}

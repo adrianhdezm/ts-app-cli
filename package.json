@@ -1,0 +1,62 @@
+{
+  "name": "ts-app-cli",
+  "version": "1.0.0",
+  "description": "CLI for creating applications based on typescript",
+  "main": "dist/index.js",
+  "bin": {
+    "ts-app-cli": "./dist/index.js"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianhdezm/ts-app-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adrianhdezm/ts-app-cli/issues"
+  },
+  "homepage": "https://github.com/adrianhdezm/ts-app-cli#readme",
+  "engines": {
+    "node": ">=10"
+  },
+  "author": "Adrian Hernandez-Mendez",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "copy-assets": "cp -a ./src/templates ./dist",
+    "format": "prettier --write ./src/**/*.ts README.md ts*.json",
+    "lint": "npm run format && tslint -p tsconfig.json -c tslint.json",
+    "build": "npm run clean && npm run lint && tsc && npm run copy-assets",
+    "start": "npm run build && nodemon dist/index.js & tsc --watch --incremental",
+    "test": "jest"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "figlet": "^1.2.4",
+    "fs-extra": "^8.1.0",
+    "ora": "^4.0.3",
+    "os": "^0.1.1",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.2.0",
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.7",
+    "@types/validate-npm-package-name": "^3.0.0",
+    "cross-env": "^6.0.3",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.2"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
