@@ -1,10 +1,18 @@
 export const getDevDependencies = (templateName: string): string[] => {
+  const common = [
+    '@types/jest',
+    'jest',
+    'prettier',
+    'ts-jest',
+    'tslint-config-prettier',
+    'tslint',
+    'typescript'
+  ];
   let dependencies: string[] = [];
-
   if (templateName === 'web') {
     dependencies = [
+      ...common,
       '@types/core-js',
-      '@types/jest',
       'clean-webpack-plugin',
       'css-loader',
       'file-loader',
@@ -12,33 +20,18 @@ export const getDevDependencies = (templateName: string): string[] => {
       'fork-ts-checker-webpack-plugin',
       'html-loader',
       'html-webpack-plugin',
-      'jest',
       'mini-css-extract-plugin',
       'optimize-css-assets-webpack-plugin',
-      'rimraf',
       'style-loader',
       'terser-webpack-plugin',
-      'ts-jest',
       'ts-loader',
       'tsconfig-paths-webpack-plugin',
-      'tslint',
-      'tslint-config-prettier',
-      'typescript',
-      'webpack',
       'webpack-cli',
-      'webpack-dev-server'
+      'webpack-dev-server',
+      'webpack'
     ];
   } else if (templateName === 'node') {
-    dependencies = [
-      'typescript',
-      'tslint',
-      'rimraf',
-      'prettier',
-      'nodemon',
-      'tslint-config-prettier',
-      'cross-env',
-      '@types/node'
-    ];
+    dependencies = [...common, '@types/node', 'cross-env', 'nodemon', 'rimraf'];
   }
 
   return dependencies;
@@ -64,7 +57,8 @@ export const getPackageScripts = (templateName: string) => {
       lint: 'npm run format && tslint -p tsconfig.json -c tslint.json',
       build: 'npm run clean && npm run lint && tsc',
       start: 'npm run build && nodemon dist/index.js & tsc --watch --incremental',
-      'start:prod': 'cross-env NODE_ENV=production node dist/index.js'
+      'start:prod': 'cross-env NODE_ENV=production node dist/index.js',
+      test: 'jest --passWithNoTests'
     };
   } else if (templateName === 'web') {
     scripts = {
