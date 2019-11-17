@@ -10,7 +10,7 @@ Runs the app in the development mode. The app will be recompiled if you make edi
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.
+Launches the test runner.
 
 ### `npm run build`
 
