@@ -25,7 +25,7 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "copy-assets": "cp -a ./src/templates ./dist",
-    "format": "prettier --write ./src/**/*.ts README.md ts*.json",
+    "format": "prettier --write \"./src/**/*.ts\" README.md ts*.json",
     "lint": "npm run format && tslint -p tsconfig.json -c tslint.json",
     "build": "npm run clean && npm run lint && tsc && npm run copy-assets",
     "start": "npm run build && nodemon dist/index.js & tsc --watch --incremental",

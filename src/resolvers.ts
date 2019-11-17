@@ -53,7 +53,7 @@ export const getPackageScripts = (templateName: string) => {
   if (templateName === 'node') {
     scripts = {
       clean: 'rimraf dist',
-      format: 'prettier --write ./src/**/*.ts README.md ts*.json',
+      format: `prettier --write \"./src/**/*.ts\" README.md ts*.json`,
       lint: 'npm run format && tslint -p tsconfig.json -c tslint.json',
       build: 'npm run clean && npm run lint && tsc',
       start: 'npm run build && nodemon dist/index.js & tsc --watch --incremental',
@@ -62,6 +62,7 @@ export const getPackageScripts = (templateName: string) => {
     };
   } else if (templateName === 'web') {
     scripts = {
+      format: `prettier --write \"./src/**/*.ts\" README.md ts*.json`,
       test: 'jest --passWithNoTests',
       build: 'webpack --env.production',
       start: 'webpack-dev-server --env.development'
