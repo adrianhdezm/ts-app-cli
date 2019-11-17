@@ -35,9 +35,7 @@ export const checkNameIsValid = (appName: string) => {
 export const checkPathIsValid = (appPath: string) => {
   if (fse.existsSync(appPath)) {
     throw new Error(
-      chalk.red(
-        'Could not create a project in an existing directory, try using a different directory name.'
-      )
+      'Could not create a project in an existing directory, try using a different project name.'
     );
   }
 };
