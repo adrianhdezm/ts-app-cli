@@ -49,20 +49,24 @@ export const getDependencies = (templateName: string): string[] => {
 };
 
 export const getPackageScripts = (templateName: string) => {
+  const common = {
+    format: `prettier --write \"./src/**/*.ts\" README.md ts*.json`,
+    test: 'jest --passWithNoTests',
+    lint: 'npm run format && tslint -p tsconfig.json -c tslint.json'
+  };
+
   let scripts = {};
   if (templateName === 'node') {
     scripts = {
+      ...common,
       clean: 'rimraf dist',
-      format: 'prettier --write ./src/**/*.ts README.md ts*.json',
-      lint: 'npm run format && tslint -p tsconfig.json -c tslint.json',
       build: 'npm run clean && npm run lint && tsc',
       start: 'npm run build && nodemon dist/index.js & tsc --watch --incremental',
-      'start:prod': 'cross-env NODE_ENV=production node dist/index.js',
-      test: 'jest --passWithNoTests'
+      'start:prod': 'cross-env NODE_ENV=production node dist/index.js'
     };
   } else if (templateName === 'web') {
     scripts = {
-      test: 'jest --passWithNoTests',
+      ...common,
       build: 'webpack --env.production',
       start: 'webpack-dev-server --env.development'
     };
