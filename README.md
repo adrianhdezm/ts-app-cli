@@ -1,12 +1,12 @@
 # Typescript App CLI [![npm package](https://github.com/adrianhdezm/ts-app-cli/workflows/npm%20package/badge.svg)]
 
-Typescript App CLI provides a simple way to start to create typescript based projects using a very opinionated subset of development tools (i.e., Webpack, Prettier, TSLint, etc.).
+Typescript App CLI provides a simple way to start a project based on typescript using a very opinionated configuration for the file structure and development tools (i.e., Webpack, Prettier, TSLint, etc.)
 
 ## How to use it
 
-Currently, we support two types of templates, `web` for projects that will run in the browser (e.g, SPA) and `node` for the remaining environments (e.g., web-server).
+Currently, we support two types of templates, `web` for projects that will run in the browser (e.g., SPA) and `node` for the remaining environments (e.g., node webserver).
 
-For creating a node based project
+For creating a node-based project
 
 ```sh
 npx ts-app-cli my-app
@@ -14,7 +14,7 @@ cd my-app
 npm start
 ```
 
-For creating a single-page applications
+For creating a web-based project (i.e., Single-page application)
 
 ```sh
 npx ts-app-cli -t web my-app
