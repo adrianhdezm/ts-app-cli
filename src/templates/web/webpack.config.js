@@ -30,7 +30,7 @@ const PORT = parseInt(process.env.PORT, 10) || 8080;
 
 const openDevServer = process.platform === 'darwin' ? 'Google Chrome' : true;
 
-module.exports = env => {
+module.exports = (env) => {
   const isProdEnv = env.production ? true : env.development ? false : undefined;
   return Object.assign(
     {
@@ -45,9 +45,7 @@ module.exports = env => {
       },
       output: {
         path: OUTPUT_PATH,
-        filename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[${
-          isProdEnv ? 'chunkhash' : 'hash'
-        }:8].js`,
+        filename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[${isProdEnv ? 'chunkhash' : 'hash'}:8].js`,
         chunkFilename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[${
           isProdEnv ? 'chunkhash' : 'hash'
         }:8].chunk.js`

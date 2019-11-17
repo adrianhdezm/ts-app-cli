@@ -9,13 +9,7 @@
     "trailing-comma": false,
     "ordered-imports": false,
     "no-implicit-dependencies": [true, ["@app", "@assets"]],
-    "no-submodule-imports": [
-      true,
-      "regenerator-runtime",
-      "core-js/es",
-      "@app",
-      "@assets"
-    ],
+    "no-submodule-imports": [true, "regenerator-runtime", "core-js/es", "@app", "@assets"],
     "object-literal-key-quotes": [true, "consistent"],
     "no-console": false,
     "object-literal-sort-keys": false,
