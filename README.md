@@ -9,7 +9,7 @@ Currently, we support two types of templates, `web` for projects that will run i
 For creating a node based project
 
 ```sh
-npx ts-app-cli -t web my-app
+npx ts-app-cli my-app
 cd my-app
 npm start
 ```
@@ -24,7 +24,7 @@ npm start
 
 ## Motivation
 
-In the past, we use to create boilerplates and example projects, mainly for building single-page applications, yet this has some limitations, such as adapting the names, removing unnecessary code, etc. We don't think that only by using a CLI all the process of changing a boilerplate can be solved, but it provides a mechanism to make some of them very easy (e.g., align project name with a project folder, README.md, and package.json).
+In the past, we use to create boilerplates and example projects, mainly for building single-page applications, yet this has some limitations, such as adjusting the names, removing unnecessary code, etc. We don't think that only by using a CLI all the adapting a boilerplate process hassles can be easily solved. Nevertheless, it provides a mechanism to address some of them straightforwardly. For example, keep the dependencies updated and align the project name with a project folder, README.md, and package.json).
 
 ## Acknowledgements
 
