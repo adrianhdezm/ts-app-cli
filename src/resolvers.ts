@@ -13,7 +13,6 @@ export const getDevDependencies = (templateName: string): string[] => {
     dependencies = [
       ...common,
       '@types/core-js',
-      '@types/whatwg-fetch',
       'clean-webpack-plugin',
       'css-loader',
       'file-loader',
