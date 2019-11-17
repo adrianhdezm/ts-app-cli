@@ -40,7 +40,7 @@ export const getDevDependencies = (templateName: string): string[] => {
 export const getDependencies = (templateName: string): string[] => {
   let dependencies: string[] = [];
   if (templateName === 'web') {
-    dependencies = ['core-js', 'whatwg-fetch'];
+    dependencies = ['core-js', 'whatwg-fetch', 'regenerator-runtime'];
   } else if (templateName === 'node') {
     dependencies = [];
   }
