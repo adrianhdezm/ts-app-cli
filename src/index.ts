@@ -109,7 +109,9 @@ if (projectName === '') {
     console.log(
       `${chalk.green('Success!')} Created ${chalk.green(appName)} at ${chalk.green(appPath)}`
     );
+    console.log();
   } catch (error) {
-    console.error(`${chalk.red('Error!')} ${error}`);
+    console.error(`${chalk.red('Error:')} ${error.message}`);
+    console.log();
   }
 })();
