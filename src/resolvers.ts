@@ -58,7 +58,8 @@ export const getPackageScripts = (templateName: string) => {
       lint: 'npm run format && tslint -p tsconfig.json -c tslint.json',
       build: 'npm run clean && npm run lint && tsc',
       start: 'npm run build && nodemon dist/index.js & tsc --watch --incremental',
-      'start:prod': 'cross-env NODE_ENV=production node dist/index.js'
+      'start:prod': 'cross-env NODE_ENV=production node dist/index.js',
+      test: 'jest --passWithNoTests'
     };
   } else if (templateName === 'web') {
     scripts = {
