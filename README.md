@@ -4,7 +4,7 @@ Typescript App CLI provides a simple way to start to create typescript based pro
 
 ## How to use it
 
-Currently, we support two types of templates, `web` for projects that will run in the browser (e.g, SPA) and `node` for the remaining environments (e.g., web-server). 
+Currently, we support two types of templates, `web` for projects that will run in the browser (e.g, SPA) and `node` for the remaining environments (e.g., web-server).
 
 For creating a node based project
 
@@ -28,7 +28,7 @@ In the past, we use to create boilerplates and example projects, mainly for buil
 
 ## Acknowledgements
 
-This projects is heavily inspired by [Create React App](https://create-react-app.dev). 
+This projects is heavily inspired by [Create React App](https://create-react-app.dev).
 
 ## License
 
