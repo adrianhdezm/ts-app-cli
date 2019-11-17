@@ -63,23 +63,31 @@ if (projectName === '') {
     console.log(`Creating a new App in ${chalk.green(appPath)}.`);
     console.log();
 
+    const spinner = ora({ color: 'yellow' });
+    spinner.start(`Generating package.json for template ${chalk.green(templateName)}`);
     const packageInfo = {
       name: appName,
       version: '0.1.0',
       private: true
     };
-
     const packageJson = { ...packageInfo, scripts: getPackageScripts(templateName) };
-
     fse.writeFileSync(
       path.join(appPath, 'package.json'),
       JSON.stringify(packageJson, null, 2) + os.EOL
     );
+    spinner.succeed(`Generated package.json for template ${chalk.green(templateName)}`);
 
+    spinner.start(`Copying ${chalk.green(templateName)} template files to ${chalk.green(appPath)}`);
     const templatePath = path.join(TEMPLATES_PATH, templateName);
     fse.copySync(templatePath, appPath);
 
-    const spinner = ora({ color: 'yellow' });
+    // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
+    // See: https://github.com/npm/npm/issues/1862
+    fse.moveSync(path.join(appPath, 'gitignore'), path.join(appPath, '.gitignore'));
+    spinner.succeed(
+      `Copied ${chalk.green(templateName)} template files to ${chalk.green(appPath)}`
+    );
+
     spinner.start(`Installing packages for ${chalk.green(templateName)} template...`);
     process.chdir(appPath);
     const devDependencies = getDevDependencies(templateName);
