@@ -1,4 +1,4 @@
-# Typescript App CLI
+# Typescript App CLI [![npm package](https://github.com/adrianhdezm/ts-app-cli/workflows/npm%20package/badge.svg)]
 
 Typescript App CLI provides a simple way to start to create typescript based projects using a very opinionated subset of development tools (i.e., Webpack, Prettier, TSLint, etc.).
 
