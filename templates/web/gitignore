@@ -28,6 +28,6 @@ node_modules/
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 dist
 
-# Development Environment 
+# Development Environment
+.idea
 .DS_Store
-.vscode

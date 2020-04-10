@@ -10,7 +10,7 @@ import * as os from 'os';
 import * as path from 'path';
 import * as util from 'util';
 
-import { CLI_ROOT_PATH, COMMON_TEMPLATE_PATH, TEMPLATES_PATH } from './constants';
+import { CLI_ROOT_PATH, TEMPLATES_PATH } from './constants';
 import { checkNameIsValid, checkPathIsValid, checkTemplateIsValid } from './helpers';
 import { getDependencies, getDevDependencies, getPackageScripts } from './resolvers';
 
@@ -80,7 +80,6 @@ if (projectName === '') {
     spinner.start(`Copying ${chalk.green(templateName)} template files to ${chalk.green(appPath)}`);
     const templatePath = path.join(TEMPLATES_PATH, templateName);
     fse.copySync(templatePath, appPath);
-    fse.copySync(COMMON_TEMPLATE_PATH, appPath);
 
     // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
     // See: https://github.com/npm/npm/issues/1862

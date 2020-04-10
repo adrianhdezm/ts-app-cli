@@ -64,12 +64,7 @@ module.exports = (env) => {
           },
           {
             test: /\.html$/,
-            loader: 'html-loader',
-            options: {
-              minimize: true,
-              removeComments: false,
-              collapseWhitespace: false
-            }
+            loader: 'html-loader'
           },
           {
             test: /\.css$/,
@@ -117,7 +112,7 @@ module.exports = (env) => {
           Object.assign(
             {
               async: false,
-              tslint: true,
+              eslint: true,
               memoryLimit: 4096
             },
             isProdEnv
