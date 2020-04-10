@@ -50,7 +50,7 @@ export const getDependencies = (templateName: string): string[] => {
 
 export const getPackageScripts = (templateName: string) => {
   const common = {
-    format: `prettier --write \"./src/**/*.ts\" README.md ts*.json`,
+    format: 'prettier --write "./src/**/*.ts" README.md ts*.json',
     test: 'jest --passWithNoTests',
     lint: 'npm run format && tslint -p tsconfig.json -c tslint.json'
   };
