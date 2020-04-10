@@ -4,9 +4,12 @@ export const getDevDependencies = (templateName: string): string[] => {
     'jest',
     'prettier',
     'ts-jest',
-    'tslint-config-prettier',
-    'tslint',
-    'typescript'
+    'typescript',
+    'eslint',
+    '@typescript-eslint/parser',
+    '@typescript-eslint/eslint-plugin',
+    'eslint-config-prettier',
+    'eslint-plugin-prettier'
   ];
   let dependencies: string[] = [];
   if (templateName === 'web') {
@@ -52,7 +55,7 @@ export const getPackageScripts = (templateName: string) => {
   const common = {
     format: 'prettier --write "./src/**/*.ts" README.md ts*.json',
     test: 'jest --passWithNoTests',
-    lint: 'npm run format && tslint -p tsconfig.json -c tslint.json'
+    lint: 'npm run format && eslint . --ext .ts'
   };
 
   let scripts = {};
