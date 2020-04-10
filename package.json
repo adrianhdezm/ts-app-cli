@@ -26,7 +26,7 @@
     "clean": "rm -rf ./dist",
     "copy-assets": "cp -a ./src/templates ./dist",
     "format": "prettier --write \"./src/**/*.{js,ts,json}\" README.md ts*.json",
-    "lint": "npm run format && tslint -p tsconfig.json -c tslint.json",
+    "lint": "npm run format",
     "build": "npm run clean && npm run lint && tsc && npm run copy-assets",
     "start": "npm run build && nodemon dist/index.js & tsc --watch --incremental",
     "test": "jest"
@@ -51,8 +51,6 @@
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
     "ts-jest": "^24.1.0",
-    "tslint": "^5.20.1",
-    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.2"
   },
   "files": [
