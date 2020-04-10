@@ -1,8 +1,8 @@
 import * as fse from 'fs-extra';
 import * as path from 'path';
 
-import { CLI_ROOT_PATH } from '../constants';
-import { checkNameIsValid, checkPathIsValid, checkTemplateIsValid } from '../helpers';
+import { CLI_ROOT_PATH } from '../src/constants';
+import { checkNameIsValid, checkPathIsValid, checkTemplateIsValid } from '../src/helpers';
 
 describe('Helpers', () => {
   it('throws on invalid template name', () => {

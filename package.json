@@ -24,10 +24,9 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "copy-assets": "cp -a ./src/templates ./dist",
     "format": "prettier --write \"./src/**/*.{js,ts,json}\" README.md ts*.json",
     "lint": "npm run format && eslint . --ext .ts",
-    "build": "npm run clean && npm run lint && tsc && npm run copy-assets",
+    "build": "npm run clean && npm run lint && tsc",
     "start": "npm run build && nodemon dist/index.js & tsc --watch --incremental",
     "test": "jest"
   },
@@ -60,6 +59,7 @@
   },
   "files": [
     "dist",
+    "templates",
     "README.md"
   ]
 }
