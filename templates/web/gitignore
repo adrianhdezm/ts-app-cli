@@ -31,4 +31,3 @@ dist
 # Development Environment
 .idea
 .DS_Store
-.vscode
