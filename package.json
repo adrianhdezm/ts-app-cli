@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/adrianhdezm/ts-app-cli#readme",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "author": "Adrian Hernandez-Mendez",
   "license": "MIT",
