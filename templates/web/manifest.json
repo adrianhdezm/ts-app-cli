@@ -1,0 +1,57 @@
+{
+  "name": "web",
+  "description": "Template to create projects using Typescript to run in modern browsers",
+  "files": [
+    "files/.eslintrc",
+    "files/.prettierrc",
+    "files/gitignore",
+    "files/jest.config.js",
+    "files/README.md",
+    "files/tsconfig.json",
+    "files/webpack.config.js",
+    "files/src/index.ts",
+    "files/src/polyfills.ts",
+    "files/src/index.html",
+    "files/src/assets/favicon.ico",
+    "files/src/assets/styles.css"
+  ],
+  "scripts": {
+    "format": "prettier --write \"./src/**/*.ts\" README.md ts*.json",
+    "test": "jest --passWithNoTests",
+    "lint": "npm run format && eslint . --ext .ts",
+    "build": "webpack --env.production",
+    "start": "webpack-dev-server --env.development"
+  },
+  "dependencies": {
+    "prod": ["core-js", "whatwg-fetch", "regenerator-runtime"],
+    "dev": [
+      "typescript",
+      "jest",
+      "@types/jest",
+      "ts-jest",
+      "prettier",
+      "eslint",
+      "@typescript-eslint/parser",
+      "@typescript-eslint/eslint-plugin",
+      "eslint-config-prettier",
+      "eslint-plugin-prettier",
+      "webpack",
+      "webpack-cli",
+      "webpack-dev-server",
+      "clean-webpack-plugin",
+      "css-loader",
+      "file-loader",
+      "fork-ts-checker-notifier-webpack-plugin",
+      "fork-ts-checker-webpack-plugin",
+      "html-loader",
+      "html-webpack-plugin",
+      "mini-css-extract-plugin",
+      "optimize-css-assets-webpack-plugin",
+      "style-loader",
+      "terser-webpack-plugin",
+      "ts-loader",
+      "tsconfig-paths-webpack-plugin",
+      "@types/core-js"
+    ]
+  }
+}

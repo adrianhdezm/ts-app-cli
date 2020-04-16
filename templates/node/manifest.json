@@ -1,0 +1,41 @@
+{
+  "name": "node",
+  "description": "Template to create NodeJS based projects using Typescript",
+  "files": [
+    "files/.eslintrc",
+    "files/.prettierrc",
+    "files/gitignore",
+    "files/jest.config.js",
+    "files/README.md",
+    "files/tsconfig.json",
+    "files/src/index.ts"
+  ],
+  "scripts": {
+    "format": "prettier --write \"./src/**/*.ts\" README.md ts*.json",
+    "test": "jest --passWithNoTests",
+    "lint": "npm run format && eslint . --ext .ts",
+    "clean": "rimraf dist",
+    "build": "npm run clean && npm run lint && tsc",
+    "start": "npm run build && nodemon dist/index.js & tsc --watch --incremental",
+    "start:prod": "cross-env NODE_ENV=production node dist/index.js"
+  },
+  "dependencies": {
+    "prod": [],
+    "dev": [
+      "typescript",
+      "jest",
+      "@types/jest",
+      "ts-jest",
+      "prettier",
+      "eslint",
+      "@typescript-eslint/parser",
+      "@typescript-eslint/eslint-plugin",
+      "eslint-config-prettier",
+      "eslint-plugin-prettier",
+      "@types/node",
+      "cross-env",
+      "nodemon",
+      "rimraf"
+    ]
+  }
+}
