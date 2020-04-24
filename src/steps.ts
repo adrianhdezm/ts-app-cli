@@ -5,7 +5,6 @@ import util from 'util';
 import fse from 'fs-extra';
 import validateProjectName from 'validate-npm-package-name';
 import {
-  delay,
   isProjectNameValid,
   isTemplateValid,
   isPathValid,
@@ -133,7 +132,10 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
       error: ''
     },
     action: async () => {
-      await delay(5000);
+      process.chdir(appPath);
+      await execAsync(`git init`);
+      await execAsync(`git add .`);
+      await execAsync(`git commit -m "Add project basic structure"`);
     }
   }
 ];
