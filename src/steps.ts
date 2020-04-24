@@ -1,5 +1,14 @@
+import os from 'os';
+import path from 'path';
+import fse from 'fs-extra';
 import validateProjectName from 'validate-npm-package-name';
-import { delay, isProjectNameValid, isTemplateValid, isPathValid } from './helpers';
+import {
+  delay,
+  isProjectNameValid,
+  isTemplateValid,
+  isPathValid,
+  getTemplateManifest
+} from './helpers';
 import { Step } from './types';
 
 export const getSteps = (name: string, template: string, appPath: string): Step[] => [
@@ -51,7 +60,7 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
       error: ''
     },
     action: async () => {
-      await delay(5000);
+      fse.ensureDirSync(appPath);
     }
   },
   {
@@ -62,7 +71,17 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
       error: ''
     },
     action: async () => {
-      await delay(5000);
+      const packageInfo = {
+        name,
+        version: '0.1.0',
+        private: true
+      };
+      const { scripts } = getTemplateManifest(template);
+      const packageJson = { ...packageInfo, scripts };
+      fse.writeFileSync(
+        path.join(appPath, 'package.json'),
+        JSON.stringify(packageJson, null, 2) + os.EOL
+      );
     }
   },
   {

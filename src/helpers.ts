@@ -84,3 +84,8 @@ export function getAnnotatedText(text: string) {
     return { text: token, colored };
   });
 }
+
+export function getTemplateManifest(template: string) {
+  const manifestPath = path.join(TEMPLATES_PATH, template, 'manifest.json');
+  return JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+}
