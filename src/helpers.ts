@@ -1,41 +1,86 @@
-import * as chalk from 'chalk';
-import * as fse from 'fs-extra';
-import * as validateProjectName from 'validate-npm-package-name';
+import path from 'path';
+import fs from 'fs';
+import minimist from 'minimist';
+import Ajv from 'ajv';
+import validateProjectName from 'validate-npm-package-name';
+import { ProgramArgs } from './types';
+import { PKG_JSON_PATH, TEMPLATES_PATH, MANIFEST_SCHEMA } from './constants';
 
-export const checkTemplateIsValid = (templateName: string) => {
-  if (!['node', 'web'].includes(templateName)) {
-    throw new Error(
-      `The template: ${chalk.red(templateName)} is not supported yet. Please use "node" or "web"`
+export const getPkgJSON = () => {
+  return JSON.parse(fs.readFileSync(PKG_JSON_PATH, 'utf8'));
+};
+
+export const isProjectNameValid = (name: string) => {
+  const projectNameValidationResult = validateProjectName(name);
+  return projectNameValidationResult.validForNewPackages;
+};
+
+export const isPathValid = (appPath: string) => {
+  return !fs.existsSync(appPath);
+};
+
+export const parseProgramArgs = (args: string[]): ProgramArgs => {
+  const parsedArgs = minimist(args, {
+    string: ['template'],
+    boolean: ['version', 'help'],
+    alias: { h: 'help', v: 'version', t: 'template' },
+    default: { template: 'node' }
+  });
+
+  const help =
+    parsedArgs._.length !== 1 || Object.keys(parsedArgs).length > 7
+      ? true
+      : (parsedArgs.help as boolean);
+  const name = parsedArgs._.length > 0 ? parsedArgs._[0] : '';
+  const version = parsedArgs.version as boolean;
+  const template = parsedArgs.template as string;
+
+  return {
+    help,
+    name,
+    version,
+    template
+  };
+};
+
+export const isManifestValid = (manifest: string) => {
+  const ajv = new Ajv();
+  const validate = ajv.compile(MANIFEST_SCHEMA);
+  return validate(manifest);
+};
+
+export const getAllAvaliableTemplates = (templateRootPath: string): string[] => {
+  const templateFolders = fs.readdirSync(templateRootPath).filter((file) => {
+    const filePath = `${templateRootPath}/${file}`;
+    return (
+      fs.statSync(filePath).isDirectory() &&
+      fs.existsSync(`${filePath}/manifest.json`) &&
+      isManifestValid(JSON.parse(fs.readFileSync(`${filePath}/manifest.json`, 'utf8')))
     );
-  }
+  });
+
+  return templateFolders.map((templateFolder) => {
+    const manifestPath = path.join(templateRootPath, templateFolder, 'manifest.json');
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    return manifest.name;
+  });
 };
 
-export const checkNameIsValid = (appName: string) => {
-  const validationResult = validateProjectName(appName);
-  if (!validationResult.validForNewPackages) {
-    const messages: string[] = [
-      `Could not create a project called ${chalk.red(appName)} because of npm naming restrictions:`
-    ];
-
-    const { errors, warnings } = validationResult;
-    if (errors) {
-      errors.forEach((error) => {
-        messages.push(chalk.red(`  *  ${error}`));
-      });
-    }
-    if (warnings) {
-      warnings.forEach((warning) => {
-        messages.push(chalk.red(`  *  ${warning}`));
-      });
-    }
-    throw new Error(`${messages.join('\n')}`);
-  }
+export const isTemplateValid = (template: string) => {
+  return getAllAvaliableTemplates(TEMPLATES_PATH).includes(template);
 };
 
-export const checkPathIsValid = (appPath: string) => {
-  if (fse.existsSync(appPath)) {
-    throw new Error(
-      'Could not create a project in an existing directory, try using a different project name.'
-    );
-  }
-};
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function getAnnotatedText(text: string) {
+  const tokens = text.split('"');
+  return tokens.map((token, index) => {
+    const colored =
+      text.includes(` "${token}" `) ||
+      (index === 1 && text.includes(`"${token}" `)) ||
+      (index === tokens.length - 2 && text.includes(` "${token}"`));
+    return { text: token, colored };
+  });
+}
