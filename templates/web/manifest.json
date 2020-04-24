@@ -2,7 +2,7 @@
   "name": "web",
   "description": "Template to create projects using Typescript to run in modern browsers",
   "files": [
-    "files/.eslintrc",
+    "files/.eslintrc.js",
     "files/.prettierrc",
     "files/gitignore",
     "files/jest.config.js",
