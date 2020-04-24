@@ -1,5 +1,7 @@
 import os from 'os';
 import path from 'path';
+import { exec } from 'child_process';
+import util from 'util';
 import fse from 'fs-extra';
 import validateProjectName from 'validate-npm-package-name';
 import {
@@ -11,6 +13,8 @@ import {
   getTemplateManifest
 } from './helpers';
 import { Step } from './types';
+
+const execAsync = util.promisify(exec);
 
 export const getSteps = (name: string, template: string, appPath: string): Step[] => [
   {
@@ -110,7 +114,15 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
       error: ''
     },
     action: async () => {
-      await delay(5000);
+      const { dependencies } = getTemplateManifest(template);
+      process.chdir(appPath);
+      if (dependencies.dev.length > 0) {
+        await execAsync(`npm i -D ${dependencies.dev.join(' ')}`);
+      }
+
+      if (dependencies.prod.length > 0) {
+        await execAsync(`npm i ${dependencies.prod.join(' ')}`);
+      }
     }
   },
   {
