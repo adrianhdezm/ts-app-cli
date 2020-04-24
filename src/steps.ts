@@ -7,6 +7,7 @@ import {
   isProjectNameValid,
   isTemplateValid,
   isPathValid,
+  getTemplateFilesPath,
   getTemplateManifest
 } from './helpers';
 import { Step } from './types';
@@ -92,7 +93,13 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
       error: ''
     },
     action: async () => {
-      await delay(5000);
+      const files = getTemplateFilesPath(template);
+      files.forEach((file: string) => {
+        // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
+        // See: https://github.com/npm/npm/issues/1862
+        const fileName = path.basename(file) === 'gitignore' ? '.gitignore' : path.basename(file);
+        fse.copyFileSync(file, path.join(appPath, fileName));
+      });
     }
   },
   {

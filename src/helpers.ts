@@ -89,3 +89,8 @@ export function getTemplateManifest(template: string) {
   const manifestPath = path.join(TEMPLATES_PATH, template, 'manifest.json');
   return JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 }
+
+export function getTemplateFilesPath(template: string) {
+  const { files } = getTemplateManifest(template);
+  return files.map((file: string) => path.join(TEMPLATES_PATH, template, file));
+}
