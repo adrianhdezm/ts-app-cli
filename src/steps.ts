@@ -98,6 +98,12 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
     action: async () => {
       const files = getTemplateFilesPath(template);
       files.forEach((file: string) => {
+        const fileExists = fse.pathExistsSync(file);
+        if (!fileExists) {
+          throw `The file: "${path.basename(
+            file
+          )}" was not found in the "${template}" template files  `;
+        }
         // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
         // See: https://github.com/npm/npm/issues/1862
         const fileName = path.basename(file) === 'gitignore' ? '.gitignore' : path.basename(file);

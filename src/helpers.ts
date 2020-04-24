@@ -75,7 +75,7 @@ export function delay(ms: number) {
 }
 
 export function getAnnotatedText(text: string) {
-  const tokens = text.split('"');
+  const tokens = String(text).split('"');
   return tokens.map((token, index) => {
     const colored =
       text.includes(` "${token}" `) ||
