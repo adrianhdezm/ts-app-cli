@@ -2,41 +2,30 @@ import * as fse from 'fs-extra';
 import * as path from 'path';
 
 import { CLI_ROOT_PATH } from '../src/constants';
-import { checkNameIsValid, checkPathIsValid, checkTemplateIsValid } from '../src/helpers';
+import { isProjectNameValid, isPathValid, isTemplateValid } from '../src/helpers';
 
 describe('Helpers', () => {
-  it('throws on invalid template name', () => {
-    expect(() => {
-      checkTemplateIsValid('notvalid');
-    }).toThrow();
+  it('isTemplateValid returns false on invalid template name', () => {
+    const invalid = 'this-is-an-invalid-template-name';
+    expect(isTemplateValid(invalid)).toBe(false);
   });
 
-  it('throws on invalid project path', () => {
+  it('isPathValid returns false on invalid project path', () => {
     const projectPath = path.join(CLI_ROOT_PATH, 'temp-directory');
 
     fse.ensureDirSync(projectPath);
-    expect(() => {
-      checkPathIsValid(projectPath);
-    }).toThrow();
+    expect(isPathValid(projectPath)).toBe(false);
 
     fse.removeSync(projectPath);
   });
 
-  it('throws on invalid project name', () => {
+  it('isProjectNameValid returns false on invalid project name', () => {
     const nameWithUppercaseLetters = 'myNiceProject';
     const nameStartWithDot = '.myproject';
     const nameStartWithUnderscore = '_myproject';
 
-    expect(() => {
-      checkNameIsValid(nameWithUppercaseLetters);
-    }).toThrow();
-
-    expect(() => {
-      checkNameIsValid(nameStartWithDot);
-    }).toThrow();
-
-    expect(() => {
-      checkNameIsValid(nameStartWithUnderscore);
-    }).toThrow();
+    expect(isProjectNameValid(nameWithUppercaseLetters)).toBe(false);
+    expect(isProjectNameValid(nameStartWithDot)).toBe(false);
+    expect(isProjectNameValid(nameStartWithUnderscore)).toBe(false);
   });
 });

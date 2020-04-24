@@ -1,7 +1,7 @@
 {
   "name": "ts-app-cli",
-  "version": "1.1.1",
-  "description": "CLI for creating applications based on typescript",
+  "version": "1.2.0",
+  "description": "CLI for creating applications based on Typescript",
   "main": "dist/index.js",
   "bin": {
     "ts-app-cli": "./dist/index.js"
@@ -24,26 +24,34 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "format": "prettier --write \"./src/**/*.{js,ts,json}\" README.md ts*.json",
-    "lint": "npm run format && eslint . --ext .ts",
+    "format": "prettier --write \"./src/**/*.{ts,tsx}\" README.md ts*.json",
+    "lint": "npm run format && eslint . --ext .ts --ext .tsx",
     "build": "npm run clean && npm run lint && tsc",
     "start": "npm run build && nodemon dist/index.js & tsc --watch --incremental",
     "test": "jest"
   },
   "dependencies": {
-    "chalk": "^3.0.0",
-    "commander": "^4.0.1",
-    "figlet": "^1.2.4",
+    "@xstate/react": "^0.8.1",
+    "ajv": "^6.12.0",
     "fs-extra": "^8.1.0",
-    "ora": "^4.0.3",
-    "os": "^0.1.1",
-    "validate-npm-package-name": "^3.0.0"
+    "ink": "^2.7.1",
+    "ink-big-text": "^1.0.1",
+    "ink-divider": "^2.0.1",
+    "ink-spinner": "^3.0.1",
+    "log-symbols": "^3.0.0",
+    "minimist": "^1.2.5",
+    "react": "^16.13.1",
+    "validate-npm-package-name": "^3.0.0",
+    "xstate": "^4.9.1"
   },
   "devDependencies": {
+    "@types/react": "^16.9.34",
     "@types/figlet": "^1.2.0",
     "@types/fs-extra": "^8.0.1",
     "@types/jest": "^24.0.23",
+    "@types/minimist": "^1.2.0",
     "@types/node": "^12.12.7",
+    "@types/ink-spinner": "^3.0.0",
     "@types/validate-npm-package-name": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
@@ -51,6 +59,7 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
