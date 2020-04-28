@@ -145,8 +145,6 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
     action: async () => {
       process.chdir(appPath);
       await execAsync(`git init`);
-      await execAsync(`git add .`);
-      await execAsync(`git commit -m "Add project basic structure"`);
     }
   }
 ];
