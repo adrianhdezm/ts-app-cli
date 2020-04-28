@@ -8,9 +8,8 @@ import {
   isProjectNameValid,
   isTemplateValid,
   isPathValid,
-  getTemplateFilesPath,
   getTemplateManifest,
-  getTemplatePath
+  getTemplateBasePath
 } from './helpers';
 import { Step } from './types';
 
@@ -97,9 +96,12 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
       error: ''
     },
     action: async () => {
-      const files = getTemplateFilesPath(template);
+      const { files } = getTemplateManifest(template);
+      const templateBasePath = getTemplateBasePath(template);
+
       files.forEach((file: string) => {
-        const fileExists = fse.pathExistsSync(file);
+        const filePath = path.join(templateBasePath, file);
+        const fileExists = fse.pathExistsSync(filePath);
         if (!fileExists) {
           throw `The file: "${path.basename(
             file
@@ -107,11 +109,10 @@ export const getSteps = (name: string, template: string, appPath: string): Step[
         }
         // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
         // See: https://github.com/npm/npm/issues/1862
-        const fileName = path.basename(file) === 'gitignore' ? '.gitignore' : path.basename(file);
-        const templatePath = getTemplatePath(template);
-        const destPath = file.replace(templatePath, appPath).replace(fileName, '');
-        fse.ensureDirSync(destPath);
-        fse.copyFileSync(file, path.join(destPath, fileName));
+        const fileName = file === 'gitignore' ? '.gitignore' : file;
+        const destPath = path.join(appPath, fileName);
+        fse.ensureDirSync(path.dirname(destPath));
+        fse.copyFileSync(filePath, destPath);
       });
     }
   },
