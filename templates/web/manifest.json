@@ -1,19 +1,20 @@
 {
   "name": "web",
   "description": "Template to create projects using Typescript to run in modern browsers",
+  "basePath": "files/",
   "files": [
-    "files/.eslintrc.js",
-    "files/.prettierrc",
-    "files/gitignore",
-    "files/jest.config.js",
-    "files/README.md",
-    "files/tsconfig.json",
-    "files/webpack.config.js",
-    "files/src/index.ts",
-    "files/src/polyfills.ts",
-    "files/src/index.html",
-    "files/src/assets/favicon.ico",
-    "files/src/assets/styles.css"
+    ".eslintrc.js",
+    ".prettierrc",
+    "gitignore",
+    "jest.config.js",
+    "README.md",
+    "tsconfig.json",
+    "webpack.config.js",
+    "src/index.ts",
+    "src/polyfills.ts",
+    "src/index.html",
+    "src/assets/favicon.ico",
+    "src/assets/styles.css"
   ],
   "scripts": {
     "format": "prettier --write \"./src/**/*.ts\" README.md ts*.json",
