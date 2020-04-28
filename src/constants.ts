@@ -19,6 +19,10 @@ export const MANIFEST_SCHEMA = {
       $id: '#/properties/description',
       type: 'string'
     },
+    basePath: {
+      $id: '#/properties/basePath',
+      type: 'string'
+    },
     files: {
       $id: '#/properties/files',
       type: 'array',

@@ -1,14 +1,15 @@
 {
   "name": "node",
   "description": "Template to create NodeJS based projects using Typescript",
+  "basePath": "files/",
   "files": [
-    "files/.eslintrc",
-    "files/.prettierrc",
-    "files/gitignore",
-    "files/jest.config.js",
-    "files/README.md",
-    "files/tsconfig.json",
-    "files/src/index.ts"
+    ".eslintrc",
+    ".prettierrc",
+    "gitignore",
+    "jest.config.js",
+    "README.md",
+    "tsconfig.json",
+    "src/index.ts"
   ],
   "scripts": {
     "format": "prettier --write \"./src/**/*.ts\" README.md ts*.json",

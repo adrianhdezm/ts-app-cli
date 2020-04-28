@@ -94,3 +94,7 @@ export function getTemplateFilesPath(template: string) {
   const { files } = getTemplateManifest(template);
   return files.map((file: string) => path.join(TEMPLATES_PATH, template, file));
 }
+
+export function getTemplatePath(template: string) {
+  return path.join(TEMPLATES_PATH, template);
+}
