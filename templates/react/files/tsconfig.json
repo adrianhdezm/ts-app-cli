@@ -15,6 +15,7 @@
     "importHelpers": true,
     "noEmit": true,
     "skipLibCheck": true,
+    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["src/assets/*"],

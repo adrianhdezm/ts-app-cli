@@ -9,5 +9,9 @@ module.exports = {
   // A map from regular expressions to paths to transformers
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
+  },
+  moduleNameMapper: {
+    '^@app/(.*)$': '<rootDir>/$1',
+    '^@assets/(.*)$': '<rootDir>/assets/$1'
   }
 };

@@ -15,7 +15,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const PROJECT_ROOT_PATH = path.resolve(__dirname);
 
 const APP_SOURCES_PATH = path.resolve(PROJECT_ROOT_PATH, 'src');
-const APPLICATION_ENTRY_PATH = path.resolve(APP_SOURCES_PATH, 'index.ts');
+const APPLICATION_ENTRY_PATH = path.resolve(APP_SOURCES_PATH, 'index.tsx');
 const HTML_TEMPLATE_PATH = path.resolve(APP_SOURCES_PATH, 'index.html');
 const FAVICON_PATH = path.resolve(APP_SOURCES_PATH, 'assets/favicon.ico');
 
@@ -60,8 +60,12 @@ const commonConfig = {
         loader: 'html-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif)$/,
         type: 'asset/resource'
+      },
+      {
+        test: /\.svg$/,
+        loader: '@svgr/webpack'
       }
     ]
   },
@@ -70,7 +74,7 @@ const commonConfig = {
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         enabled: true,
-        files: './src/**/*.{ts,js}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
+        files: './src/**/*.{ts,tsx,js,jsx}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
       },
       async: true,
       typescript: {
