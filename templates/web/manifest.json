@@ -5,6 +5,9 @@
   "files": [
     ".eslintrc.js",
     ".prettierrc",
+    ".prettierignore",
+    ".browserslistrc",
+    "custom.d.ts",
     "gitignore",
     "jest.config.js",
     "README.md",
@@ -17,14 +20,15 @@
     "src/assets/styles.css"
   ],
   "scripts": {
-    "format": "prettier --write \"./src/**/*.ts\" README.md ts*.json",
+    "prettier:format": "prettier \"**/*.*\" --write",
+    "prettier:check": "prettier \"**/*.*\" --check",
     "test": "jest --passWithNoTests",
-    "lint": "npm run format && eslint . --ext .ts",
-    "build": "webpack --env.production",
-    "start": "webpack-dev-server --env.development"
+    "lint": "npm run prettier:format && eslint --ext=js,ts ./src",
+    "start": "webpack serve --env development",
+    "build": "webpack --env production"
   },
   "dependencies": {
-    "prod": ["core-js", "whatwg-fetch", "regenerator-runtime"],
+    "prod": ["core-js", "whatwg-fetch", "regenerator-runtime", "tslib"],
     "dev": [
       "typescript",
       "jest",
@@ -39,15 +43,15 @@
       "webpack",
       "webpack-cli",
       "webpack-dev-server",
+      "webpack-merge",
       "clean-webpack-plugin",
       "css-loader",
-      "file-loader",
       "fork-ts-checker-notifier-webpack-plugin",
       "fork-ts-checker-webpack-plugin",
       "html-loader",
-      "html-webpack-plugin",
+      "html-webpack-plugin@next",
       "mini-css-extract-plugin",
-      "optimize-css-assets-webpack-plugin",
+      "css-minimizer-webpack-plugin",
       "style-loader",
       "terser-webpack-plugin",
       "ts-loader",
