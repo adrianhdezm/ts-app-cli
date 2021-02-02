@@ -1,0 +1,68 @@
+{
+  "name": "react",
+  "description": "Template to create projects using Typescript to run in modern browsers",
+  "basePath": "files/",
+  "files": [
+    ".eslintrc.js",
+    ".prettierrc",
+    ".prettierignore",
+    ".browserslistrc",
+
+    "gitignore",
+    "jest.config.js",
+    "README.md",
+    "tsconfig.json",
+    "webpack.config.js",
+    "src/app.tsx",
+    "src/index.tsx",
+    "src/index.html",
+    "src/custom.d.ts",
+    "src/assets/favicon.ico",
+    "src/assets/styles.css"
+  ],
+  "scripts": {
+    "prettier:format": "prettier \"**/*.*\" --write",
+    "prettier:check": "prettier \"**/*.*\" --check",
+    "test": "jest --passWithNoTests",
+    "lint": "npm run prettier:format && eslint --ext=jsx,js,ts,tsx ./src",
+    "start": "webpack serve --env development",
+    "build": "webpack --env production"
+  },
+  "dependencies": {
+    "prod": ["tslib", "react", "react-dom"],
+    "dev": [
+      "typescript",
+      "jest",
+      "@types/jest",
+      "ts-jest",
+      "prettier",
+      "eslint",
+      "@typescript-eslint/parser",
+      "@typescript-eslint/eslint-plugin",
+      "@svgr/webpack",
+      "@types/react",
+      "@types/react-dom",
+      "eslint-config-prettier",
+      "eslint-plugin-react",
+      "eslint-plugin-react-hooks",
+      "eslint-plugin-prettier",
+      "webpack",
+      "webpack-cli",
+      "webpack-dev-server",
+      "webpack-merge",
+      "clean-webpack-plugin",
+      "css-loader",
+      "fork-ts-checker-notifier-webpack-plugin",
+      "fork-ts-checker-webpack-plugin",
+      "html-loader",
+      "html-webpack-plugin@next",
+      "mini-css-extract-plugin",
+      "css-minimizer-webpack-plugin",
+      "style-loader",
+      "terser-webpack-plugin",
+      "ts-loader",
+      "tsconfig-paths-webpack-plugin",
+      "@types/core-js"
+    ]
+  }
+}
