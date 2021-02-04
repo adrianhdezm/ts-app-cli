@@ -3,10 +3,11 @@ const path = require('path');
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'jest-dom'],
   extends: [
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:jest-dom/recommended',
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',

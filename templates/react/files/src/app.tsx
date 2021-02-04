@@ -1,9 +1,18 @@
 import React from 'react';
 
-export const App = (): JSX.Element => {
+interface AppProps {
+  name?: string;
+}
+
+export const App = ({ name }: AppProps): JSX.Element => {
+  const msg = `Hello ${name}!`;
   return (
     <>
-      <p>Hello World!</p>
+      <p>{msg}</p>
     </>
   );
+};
+
+App.defaultProps = {
+  name: 'World'
 };
