@@ -132,8 +132,7 @@ const developmentConfig = {
   ],
   devServer: {
     compress: true,
-    port: PORT,
-    host: HOST,
+    public: `http://${HOST}:${PORT}`,
     overlay: {
       errors: true,
       warnings: true
