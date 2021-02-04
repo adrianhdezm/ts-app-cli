@@ -11,6 +11,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const reactRefresh = require('react-refresh-typescript');
 
 const PROJECT_ROOT_PATH = path.resolve(__dirname);
 
@@ -51,13 +53,12 @@ const commonConfig = {
     strictExportPresence: true,
     rules: [
       {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: [{ loader: 'ts-loader', options: { transpileOnly: true } }]
-      },
-      {
         test: /\.html$/,
         loader: 'html-loader'
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        type: 'asset/resource'
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -96,6 +97,21 @@ const developmentConfig = {
   module: {
     rules: [
       {
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [reactRefresh()]
+              })
+            }
+          }
+        ]
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       }
@@ -103,6 +119,7 @@ const developmentConfig = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: HTML_TEMPLATE_PATH,
       inject: true,
@@ -114,19 +131,14 @@ const developmentConfig = {
     })
   ],
   devServer: {
-    // only dev
-    contentBase: OUTPUT_PATH,
     compress: true,
-    watchContentBase: true,
-    hot: true,
     port: PORT,
     host: HOST,
     overlay: {
       errors: true,
       warnings: true
     },
-    open: openDevServer,
-    publicPath: '/'
+    open: openDevServer
   }
 };
 
@@ -136,6 +148,11 @@ const productionConfig = {
   devtool: 'source-map',
   module: {
     rules: [
+      {
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: [{ loader: 'ts-loader', options: { transpileOnly: true } }]
+      },
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
