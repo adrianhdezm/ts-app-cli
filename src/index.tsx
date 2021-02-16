@@ -1,7 +1,26 @@
 #!/usr/bin/env node
 
-import React from 'react';
 import { render } from 'ink';
-import { CLI } from './components/cli';
+import path from 'path';
+import React from 'react';
 
-render(<CLI params={process.argv.slice(2)} />);
+import { CLI } from './cli';
+import { getPkgJSON, parseProgramArgs } from './services';
+
+const params = process.argv.slice(2);
+const { name: pkgName, version: cliVersion, description } = getPkgJSON();
+const { help, name, version, template } = parseProgramArgs(params);
+const appPath = path.resolve(name);
+
+render(
+  <CLI
+    pkgName={pkgName}
+    cliVersion={cliVersion}
+    description={description}
+    help={help}
+    name={name}
+    version={version}
+    template={template}
+    appPath={appPath}
+  />
+);
