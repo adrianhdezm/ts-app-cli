@@ -5,31 +5,17 @@ export interface ProgramArgs {
   template: string;
 }
 
-export type StepAction = () => Promise<void>;
-
-export interface Step {
+export interface CliMachineContext {
   name: string;
-  messages: {
-    active: string;
-    completed: string;
-    error: string;
-  };
-  action: StepAction;
+  template: string;
+  path: string;
+  error: Error | null;
+  currentStepMessage: string | null;
+  completedStepMessages: string[];
 }
 
-export interface StepStateSchema {
-  states: {
-    active: {};
-    completed: {};
-  };
+export type CliMachineEvent = { type: 'START' } | { type: 'SHOW_HELP' } | { type: 'SHOW_VERSION' };
+export interface ValidationErrorEvent {
+  type: string;
+  data: Error;
 }
-export interface CLIStateSchema {
-  states: Record<string, {} | StepStateSchema>;
-}
-
-export interface CLIContext {
-  completed: string[];
-  error?: string;
-}
-
-export type CLIEvent = { type: 'START' };
