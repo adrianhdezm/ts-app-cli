@@ -110,19 +110,13 @@ const developmentConfig = {
     })
   ],
   devServer: {
-    // only dev
-    contentBase: OUTPUT_PATH,
     compress: true,
-    watchContentBase: true,
-    hot: true,
-    port: PORT,
-    host: HOST,
+    public: `http://${HOST}:${PORT}`,
     overlay: {
       errors: true,
       warnings: true
     },
-    open: openDevServer,
-    publicPath: '/'
+    open: openDevServer
   }
 };
 

@@ -42,7 +42,7 @@
       "eslint-plugin-prettier",
       "webpack",
       "webpack-cli",
-      "webpack-dev-server",
+      "webpack-dev-server@next",
       "webpack-merge",
       "clean-webpack-plugin",
       "css-loader",
