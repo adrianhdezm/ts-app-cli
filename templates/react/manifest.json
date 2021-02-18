@@ -61,7 +61,7 @@
       "fork-ts-checker-notifier-webpack-plugin",
       "fork-ts-checker-webpack-plugin",
       "html-loader",
-      "html-webpack-plugin@next",
+      "html-webpack-plugin",
       "mini-css-extract-plugin",
       "css-minimizer-webpack-plugin",
       "style-loader",
