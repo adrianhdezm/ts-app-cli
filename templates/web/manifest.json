@@ -20,8 +20,8 @@
     "src/assets/styles.css"
   ],
   "scripts": {
-    "prettier:format": "prettier \"**/*.*\" --write",
-    "prettier:check": "prettier \"**/*.*\" --check",
+    "format": "prettier \"**/*.*\" --write",
+    "check-format": "prettier \"**/*.*\" --check",
     "test": "jest --passWithNoTests",
     "lint": "npm run prettier:format && eslint --ext=js,ts ./src",
     "start": "webpack serve --env development",
