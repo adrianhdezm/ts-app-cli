@@ -51,7 +51,7 @@
       "eslint-plugin-jest-dom",
       "webpack",
       "webpack-cli",
-      "webpack-dev-server@next",
+      "webpack-dev-server",
       "webpack-merge",
       "@pmmmwh/react-refresh-webpack-plugin",
       "react-refresh-typescript",
