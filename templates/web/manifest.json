@@ -14,7 +14,6 @@
     "tsconfig.json",
     "webpack.config.js",
     "src/index.ts",
-    "src/polyfills.ts",
     "src/index.html",
     "src/assets/favicon.ico",
     "src/assets/styles.css"
