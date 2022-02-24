@@ -1,12 +1,11 @@
 const path = require('path');
+const { pathsToModuleNameMapper } = require('ts-jest');
+const { compilerOptions } = require('./tsconfig.json');
 
+/** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
   verbose: true,
-  rootDir: path.resolve(__dirname, 'src'),
   collectCoverage: false,
   preset: 'ts-jest',
-  moduleNameMapper: {
-    '^@app/(.*)$': '<rootDir>/$1',
-    '^@assets/(.*)$': '<rootDir>/assets/$1'
-  }
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' })
 };
