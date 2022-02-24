@@ -56,7 +56,6 @@
       "@pmmmwh/react-refresh-webpack-plugin",
       "react-refresh-typescript",
       "react-refresh",
-      "clean-webpack-plugin",
       "css-loader",
       "fork-ts-checker-notifier-webpack-plugin",
       "fork-ts-checker-webpack-plugin",

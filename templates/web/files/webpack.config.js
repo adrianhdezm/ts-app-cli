@@ -3,7 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -44,7 +43,8 @@ const commonConfig = {
     path: OUTPUT_PATH,
     filename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[contenthash].js`,
     chunkFilename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[contenthash].chunk.js`,
-    assetModuleFilename: `${OUTPUT_ASSETS_FOLDER}/[name][ext]`
+    assetModuleFilename: `${OUTPUT_ASSETS_FOLDER}/[name][ext]`,
+    clean: true
   },
   module: {
     // Makes missing exports an error instead of warning
@@ -66,7 +66,6 @@ const commonConfig = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({ verbose: true }),
     new ForkTsCheckerWebpackPlugin({
       eslint: {
         enabled: true,

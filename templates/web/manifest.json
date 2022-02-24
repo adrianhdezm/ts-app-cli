@@ -43,7 +43,6 @@
       "webpack-cli",
       "webpack-dev-server",
       "webpack-merge",
-      "clean-webpack-plugin",
       "css-loader",
       "fork-ts-checker-notifier-webpack-plugin",
       "fork-ts-checker-webpack-plugin",
@@ -54,8 +53,7 @@
       "style-loader",
       "terser-webpack-plugin",
       "ts-loader",
-      "tsconfig-paths-webpack-plugin",
-      "@types/core-js"
+      "tsconfig-paths-webpack-plugin"
     ]
   }
 }
