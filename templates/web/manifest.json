@@ -14,14 +14,13 @@
     "tsconfig.json",
     "webpack.config.js",
     "src/index.ts",
-    "src/polyfills.ts",
     "src/index.html",
     "src/assets/favicon.ico",
     "src/assets/styles.css"
   ],
   "scripts": {
-    "prettier:format": "prettier \"**/*.*\" --write",
-    "prettier:check": "prettier \"**/*.*\" --check",
+    "format": "prettier \"**/*.*\" --write",
+    "check-format": "prettier \"**/*.*\" --check",
     "test": "jest --passWithNoTests",
     "lint": "npm run prettier:format && eslint --ext=js,ts ./src",
     "start": "webpack serve --env development",
@@ -40,13 +39,12 @@
       "@typescript-eslint/eslint-plugin",
       "eslint-config-prettier",
       "eslint-plugin-prettier",
+      "eslint-webpack-plugin",
       "webpack",
       "webpack-cli",
-      "webpack-dev-server@next",
+      "webpack-dev-server",
       "webpack-merge",
-      "clean-webpack-plugin",
       "css-loader",
-      "fork-ts-checker-notifier-webpack-plugin",
       "fork-ts-checker-webpack-plugin",
       "html-loader",
       "html-webpack-plugin",
@@ -55,8 +53,7 @@
       "style-loader",
       "terser-webpack-plugin",
       "ts-loader",
-      "tsconfig-paths-webpack-plugin",
-      "@types/core-js"
+      "tsconfig-paths-webpack-plugin"
     ]
   }
 }

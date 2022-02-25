@@ -3,9 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -27,8 +26,9 @@ const OUTPUT_PATH = path.resolve(PROJECT_ROOT_PATH, OUTPUT_FOLDER);
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = parseInt(process.env.PORT, 10) || 8080;
+const ASSET_PATH = process.env.ASSET_PATH || '/';
 
-const openDevServer = process.platform === 'darwin' ? 'Google Chrome' : true;
+const browserCmd = process.platform === 'darwin' ? 'Google Chrome' : 'google-chrome';
 
 const commonConfig = {
   target: 'browserslist',
@@ -42,9 +42,11 @@ const commonConfig = {
   },
   output: {
     path: OUTPUT_PATH,
+    publicPath: ASSET_PATH,
     filename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[contenthash].js`,
     chunkFilename: `${OUTPUT_SCRIPTS_FOLDER}/[name].[contenthash].chunk.js`,
-    assetModuleFilename: `${OUTPUT_ASSETS_FOLDER}/[name][ext]`
+    assetModuleFilename: `${OUTPUT_ASSETS_FOLDER}/[name][ext]`,
+    clean: true
   },
   module: {
     // Makes missing exports an error instead of warning
@@ -66,12 +68,11 @@ const commonConfig = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({ verbose: true }),
+    new ESLintPlugin({
+      extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+      eslintPath: require.resolve('eslint')
+    }),
     new ForkTsCheckerWebpackPlugin({
-      eslint: {
-        enabled: true,
-        files: './src/**/*.{ts,js}' // required - same as command `eslint ./src/**/*.{ts,tsx,js,jsx} --ext .ts,.tsx,.js,.jsx`
-      },
       async: true,
       typescript: {
         enabled: true,
@@ -98,25 +99,25 @@ const developmentConfig = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: HTML_TEMPLATE_PATH,
       inject: true,
       favicon: FAVICON_PATH
-    }),
-    new ForkTsCheckerNotifierWebpackPlugin({
-      title: 'TypeScript',
-      excludeWarnings: false
     })
   ],
   devServer: {
     compress: true,
-    public: `http://${HOST}:${PORT}`,
-    overlay: {
-      errors: true,
-      warnings: true
+    host: HOST,
+    port: PORT,
+    hot: 'only',
+    historyApiFallback: true,
+    open: {
+      target: ['/'],
+      app: {
+        name: browserCmd
+      }
     },
-    open: openDevServer
+    watchFiles: ['src/**/*.tsx', 'src/**/*.ts', 'src/**/*.css', 'src/**/*.html']
   }
 };
 
