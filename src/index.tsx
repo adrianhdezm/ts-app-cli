@@ -5,7 +5,7 @@ import path from 'path';
 import React from 'react';
 
 import { CLI } from './cli';
-import { getPkgJSON, parseProgramArgs } from './services';
+import { getPkgJSON, parseProgramArgs } from './utils';
 
 const params = process.argv.slice(2);
 const { name: pkgName, version: cliVersion, description } = getPkgJSON();

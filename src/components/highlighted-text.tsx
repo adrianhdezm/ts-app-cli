@@ -1,9 +1,9 @@
-import { Box, Color, ColorProps, Text } from 'ink';
+import { Box, Text } from 'ink';
 import React, { useMemo } from 'react';
 
 interface HighlightedTextParams {
   text: string;
-  color?: keyof Pick<ColorProps, 'white' | 'blue' | 'green' | 'yellow' | 'red' | 'green'>;
+  color?: 'white' | 'blue' | 'green' | 'yellow' | 'red' | 'green';
 }
 
 export const HighlightedText: React.FC<HighlightedTextParams> = ({ text, color }) => {
@@ -22,9 +22,9 @@ export const HighlightedText: React.FC<HighlightedTextParams> = ({ text, color }
     <Box>
       {annotatedText.map((item, index) =>
         item.colored ? (
-          <Color key={index} keyword={color}>
+          <Text key={index} color={color}>
             {item.text}
-          </Color>
+          </Text>
         ) : (
           <Text key={index}>{item.text}</Text>
         )
