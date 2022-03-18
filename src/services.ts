@@ -1,4 +1,5 @@
 import Ajv from 'ajv';
+import chalk from 'chalk';
 import { exec } from 'child_process';
 import fse from 'fs-extra';
 import minimist from 'minimist';
@@ -11,6 +12,39 @@ import { MANIFEST_SCHEMA, PKG_JSON_PATH, TEMPLATES_PATH } from './constants';
 import { ProgramArgs } from './types';
 
 const execAsync = util.promisify(exec);
+
+export function isUnicodeSupported() {
+  if (process.platform !== 'win32') {
+    return process.env.TERM !== 'linux'; // Linux console (kernel)
+  }
+
+  return (
+    Boolean(process.env.CI) ||
+    Boolean(process.env.WT_SESSION) || // Windows Terminal
+    process.env.ConEmuTask === '{cmd::Cmder}' || // ConEmu and cmder
+    process.env.TERM_PROGRAM === 'vscode' ||
+    process.env.TERM === 'xterm-256color' ||
+    process.env.TERM === 'alacritty'
+  );
+}
+
+export function logSymbols(symbol: string) {
+  const main: Record<string, string> = {
+    info: chalk.blue('ℹ'),
+    success: chalk.green('✔'),
+    warning: chalk.yellow('⚠'),
+    error: chalk.red('✖')
+  };
+
+  const fallback: Record<string, string> = {
+    info: chalk.blue('i'),
+    success: chalk.green('√'),
+    warning: chalk.yellow('‼'),
+    error: chalk.red('×')
+  };
+
+  return isUnicodeSupported() ? main[symbol] : fallback[symbol];
+}
 
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
