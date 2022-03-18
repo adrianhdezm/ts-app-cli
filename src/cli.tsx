@@ -7,7 +7,7 @@ import { useMachine } from '@xstate/react';
 import { cliMachine } from './cli-machine';
 import { HighlightedText } from './components/highlighted-text';
 import { PageLayout } from './components/page-layout';
-import { logSymbols } from './services';
+import { logSymbols } from './utils';
 
 interface CLIParams {
   pkgName: string;
