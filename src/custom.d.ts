@@ -1,1 +1,1 @@
-declare module 'ink-big-text';
+declare module 'cfonts';

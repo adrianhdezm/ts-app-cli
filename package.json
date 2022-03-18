@@ -33,10 +33,10 @@
   "dependencies": {
     "@xstate/react": "^0.8.1",
     "ajv": "^6.12.0",
+    "cfonts": "^2.10.0",
     "chalk": "^4.1.2",
     "fs-extra": "^8.1.0",
     "ink": "^3.2.0",
-    "ink-big-text": "^1.2.0",
     "ink-divider": "^3.0.0",
     "ink-spinner": "^4.0.3",
     "minimist": "^1.2.5",

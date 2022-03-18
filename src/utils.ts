@@ -1,8 +1,23 @@
 import chalk from 'chalk';
 import fse from 'fs-extra';
 import minimist from 'minimist';
+import CFonts from 'cfonts';
 import { PKG_JSON_PATH } from './constants';
 import { ProgramArgs } from './types';
+
+export function getBigText(text: string) {
+  const output = CFonts.render(text, {
+    font: 'block', // define the font face
+    align: 'left', // define text alignment
+    colors: ['system'], // define all colors
+    background: 'transparent', // define the background color, you can also use `backgroundColor` here as key
+    letterSpacing: 1, // define letter spacing
+    lineHeight: 1, // define the line height
+    space: true, // define if the output text should have empty lines on top and on the bottom
+    maxLength: '0' // define how many character can be on one line
+  });
+  return output.string;
+}
 
 export function isUnicodeSupported() {
   if (process.platform !== 'win32') {
