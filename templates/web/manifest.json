@@ -7,12 +7,12 @@
     ".prettierrc",
     ".prettierignore",
     ".browserslistrc",
-    "custom.d.ts",
     "gitignore",
     "jest.config.js",
     "README.md",
     "tsconfig.json",
     "webpack.config.js",
+    "src/custom.d.ts",
     "src/index.ts",
     "src/index.html",
     "src/assets/favicon.ico",
@@ -27,7 +27,7 @@
     "build": "webpack --env production"
   },
   "dependencies": {
-    "prod": ["core-js", "whatwg-fetch", "regenerator-runtime", "tslib"],
+    "prod": ["tslib"],
     "dev": [
       "typescript",
       "jest",
