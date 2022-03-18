@@ -1,6 +1,6 @@
 {
   "name": "ts-app-cli",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "CLI for creating applications based on Typescript",
   "main": "dist/index.js",
   "bin": {
